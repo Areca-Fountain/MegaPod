@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 230.8 211.02">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_48);
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_50-2);
+      }
+
+      .cls-3 {
+        fill: url(#Degradado_sin_nombre_50);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_48" data-name="Degradado sin nombre 48" x1="-93.02" y1="-2814.54" x2="17.77" y2="-2814.54" gradientTransform="translate(-139.22 -2690.83) rotate(174.31)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#800"/>
+      <stop offset=".14" stop-color="#92040b"/>
+      <stop offset=".4" stop-color="#af0f29"/>
+      <stop offset=".74" stop-color="#de205a"/>
+      <stop offset=".95" stop-color="#ff2d7c"/>
+      <stop offset=".99" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_50" data-name="Degradado sin nombre 50" x1="25.85" y1="-2814.54" x2="140.81" y2="-2814.54" gradientTransform="translate(-139.22 -2690.83) rotate(174.31)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6c0000"/>
+      <stop offset="1" stop-color="#ff2d7c"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_50-2" data-name="Degradado sin nombre 50" x1="14.57" y1="-2762.48" x2="14.57" y2="-2668.9" xlink:href="#Degradado_sin_nombre_50"/>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <polygon class="cls-1" points="135.29 211.02 121.37 71.37 230.8 0 135.29 211.02"/>
+      <polygon class="cls-3" points="135.29 211.02 121.37 71.37 0 23 135.29 211.02"/>
+      <polygon class="cls-2" points="230.8 0 0 23 121.37 71.37 230.8 0"/>
+    </g>
+  </g>
+</svg>
