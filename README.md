@@ -1,4 +1,9 @@
 # MegaPod
+## Project Demonstration
+
+[![Watch the video](https://img.youtube.com/vi/Drffn97HSRY/0.jpg)](https://youtu.be/Drffn97HSRY)
+
+Click the image above to watch the demo video on YouTube.
 
 A full-stack web application built using **React (Vite)** for the frontend and **Node.js (Express)** with **MySQL** for the backend.
 
