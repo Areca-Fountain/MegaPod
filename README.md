@@ -122,18 +122,3 @@ http://localhost:5173
 
 ---
 
-##  3. Login and Level System
-
-- Backend endpoints are available under `/user` like:
-
-  - `POST /user/signup`
-  - `POST /user/signing`
-  - `POST /user/update-level`
-  - `POST /user/get-level`
-  - `POST /user/completed-levels`
-
-- The level system tracks each student’s progress.
-- Completed levels are shown on the `/levels` page as a vertical timeline.
-- The main game page is under `/game`.
-
----
