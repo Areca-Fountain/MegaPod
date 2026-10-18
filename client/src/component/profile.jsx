@@ -3,9 +3,13 @@ import { useState } from "react";
 export default function Profile({ name, email }) {
     const [showProfile, setShowProfile] = useState(false);
 
-    const Logout = () => {
-        alert("Logout");
-        // You can clear session or redirect here
+    const Logout = async () => {
+        try {
+            await fetch("/api/user/logout", { method: "POST", credentials: "include" });
+        } catch (err) {
+            console.error("Logout failed:", err);
+        }
+        window.location.href = "/login";
     };
 
     return (

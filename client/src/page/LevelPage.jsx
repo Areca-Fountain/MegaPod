@@ -23,7 +23,7 @@ function LevelPage() {
 
 
     const fetchCompletedLevels = (email) => {
-        fetch("http://localhost:3000/user/completed-levels", {
+        fetch("/api/user/completed-levels", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),

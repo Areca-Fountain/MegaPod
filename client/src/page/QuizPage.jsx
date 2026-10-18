@@ -54,7 +54,7 @@ export default function QuizPage() {
     const [level, setLevel] = useState(0);
 
     const fetchAndSetLevel = (email) => {
-        fetch("http://localhost:3000/user/get-level", {
+        fetch("/api/user/get-level", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email })
@@ -106,7 +106,7 @@ export default function QuizPage() {
     const submitQuizResult = async () => {
         if (!user) return;
         try {
-            const response = await fetch('http://localhost:3000/user/update-level', {
+            const response = await fetch('/api/user/update-level', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

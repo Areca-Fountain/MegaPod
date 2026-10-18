@@ -12,7 +12,7 @@ function Dashboard() {
 
     // Helper to fetch and set level
     const fetchAndSetLevel = (email) => {
-        fetch("http://localhost:3000/user/get-level", {
+        fetch("/api/user/get-level", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email })

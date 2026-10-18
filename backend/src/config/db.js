@@ -1,20 +1,24 @@
-require('dotenv').config({ path: __dirname + '/.env' });
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-const connection = mysql.createConnection({
+// Hosted MySQL providers (Aiven, TiDB Cloud, ...) require TLS. Set DB_SSL=true there.
+// Aiven also gives you a CA certificate: paste it into DB_CA.
+let ssl;
+if (process.env.DB_SSL === 'true') {
+    ssl = process.env.DB_CA
+        ? { ca: process.env.DB_CA.replace(/\\n/g, '\n') }
+        : { minVersion: 'TLSv1.2', rejectUnauthorized: true };
+}
+
+// A pool (not a single connection) so serverless instances can reconnect cleanly.
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT || 3306),
     user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
+    password: process.env.DB_PASS || process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 5,
+    ssl
 });
 
-connection.connect((err) => {
-    if (err) {
-        console.error('MySQL connection failed:', err);
-        return;
-    }
-    console.log('Connected to MySQL database');
-});
-
-module.exports = connection;
-
+module.exports = pool;

@@ -3,7 +3,6 @@ import './App.css'
 import Home from "./page/home.jsx";
 import QuizPage from "./page/QuizPage.jsx";
 import Game from "./page/game.jsx";
-import Test from "./test/Test.jsx";
 import Login from "./page/Login.jsx";
 import Register from "./page/Register.jsx";
 import NotFound from "./page/NotFound.jsx";
@@ -31,7 +30,6 @@ function App() {
             <Route path="/about" element={<Aboutus />} />
             <Route path="/WalletConnected" element={<WalletConnected />} />
             <Route path="/levels" element={<LevelPage />} />
-            <Route path="/test" element={<Test />} />
             <Route path="*" element={<NotFound />} />
                 <Route path="/NFT" element={<NFTCollection />} />
                 <Route path="/NFTWON" element={<NFTWON />} />

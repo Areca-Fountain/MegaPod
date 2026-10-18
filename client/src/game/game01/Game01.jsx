@@ -71,7 +71,7 @@ export default function Game01(props) {
     // function send request to the backend with email and level number
     const sendRequest = async () => {
         try {
-            const response = await fetch('http://localhost:3000/user/update-level', {
+            const response = await fetch('/api/user/update-level', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

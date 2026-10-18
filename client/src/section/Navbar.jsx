@@ -24,9 +24,6 @@ export default function Navbar() {
                 console.log("User is logged in:", data.user);
                 setUserLogin(true);
                 setUser(data.user);
-                // global use
-                window.user.name = data.user.name;
-                window.user.email = data.user.email;
 
 
             } else {

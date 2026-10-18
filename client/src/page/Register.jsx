@@ -33,7 +33,7 @@ function Register() {
         console.log(payload);
 
         try {
-            const response = await fetch("http://localhost:3000/user/signup", {
+            const response = await fetch("/api/user/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

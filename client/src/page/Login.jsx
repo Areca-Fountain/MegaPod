@@ -38,7 +38,7 @@ function Login() {
 
         console.log(payload)
         try {
-            const response = await fetch("http://localhost:3000/user/signing", {
+            const response = await fetch("/api/user/signing", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

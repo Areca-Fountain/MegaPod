@@ -62,11 +62,10 @@ function ConnectWallet() {
 
 
             // Send wallet address to backend
-            const response = await fetch('http://localhost:3000/wallet/save-wallet', {
+            const response = await fetch('/api/wallet/save-wallet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` // If you're using token-based auth
                 },
                 credentials: 'include', // Important for sending cookies
 

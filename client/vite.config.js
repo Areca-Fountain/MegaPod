@@ -18,4 +18,11 @@ export default defineConfig({
             buffer: 'buffer', // Enables Buffer usage (for CSL)
         },
     },
+    server: {
+        // Local dev: the browser calls /api on :5173 and Vite forwards it to the Express server.
+        // This mirrors the production rewrite in vercel.json, so the same code works in both places.
+        proxy: {
+            '/api': 'http://localhost:3000',
+        },
+    },
 })

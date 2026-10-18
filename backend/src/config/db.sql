@@ -1,82 +1,41 @@
--- MySQL Workbench Forward Engineering
+-- MegaPod schema (MySQL 8 / TiDB compatible).
+--
+-- Local MySQL:  first run   CREATE DATABASE megapod CHARACTER SET utf8mb4;  USE megapod;
+-- Hosted MySQL: select the database the provider gave you (for example defaultdb), then run this file.
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+CREATE TABLE IF NOT EXISTS student (
+    email    VARCHAR(255) NOT NULL,
+    name     VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,   -- bcrypt hash (60 chars); the old VARCHAR(45) is too short
+    PRIMARY KEY (email)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema megapod
--- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS student_level (
+    l_id  INT NOT NULL AUTO_INCREMENT,
+    level INT NOT NULL,
+    PRIMARY KEY (l_id),
+    UNIQUE KEY uq_student_level_level (level)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
--- -----------------------------------------------------
--- Schema megapod
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `megapod` DEFAULT CHARACTER SET utf8mb3 ;
-USE `megapod` ;
+CREATE TABLE IF NOT EXISTS student_has_student_level (
+    student_email      VARCHAR(255) NOT NULL,
+    student_level_l_id INT NOT NULL,
+    PRIMARY KEY (student_email, student_level_l_id),
+    INDEX idx_shsl_level (student_level_l_id),
+    CONSTRAINT fk_shsl_student FOREIGN KEY (student_email) REFERENCES student (email),
+    CONSTRAINT fk_shsl_level FOREIGN KEY (student_level_l_id) REFERENCES student_level (l_id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
--- -----------------------------------------------------
--- Table `megapod`.`student`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `megapod`.`student` (
-                                                   `email` VARCHAR(255) NOT NULL,
-    `name` VARCHAR(255) NOT NULL,
-    `password` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`email`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb3;
+CREATE TABLE IF NOT EXISTS wallet (
+    id       INT NOT NULL AUTO_INCREMENT,
+    w_email  VARCHAR(255) NOT NULL,
+    address  VARCHAR(255) NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_wallet_email (w_email),
+    CONSTRAINT wallet_email_fk FOREIGN KEY (w_email) REFERENCES student (email)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
-
--- -----------------------------------------------------
--- Table `megapod`.`student_level`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `megapod`.`student_level` (
-                                                         `l_id` INT NOT NULL AUTO_INCREMENT,
-                                                         `level` INT NOT NULL,
-                                                         PRIMARY KEY (`l_id`))
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 4
-    DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `megapod`.`student_has_student_level`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `megapod`.`student_has_student_level` (
-                                                                     `student_email` VARCHAR(255) NOT NULL,
-    `student_level_l_id` INT NOT NULL,
-    PRIMARY KEY (`student_email`, `student_level_l_id`),
-    INDEX `fk_student_has_student_level_student_level1_idx` (`student_level_l_id` ASC) VISIBLE,
-    INDEX `fk_student_has_student_level_student1_idx` (`student_email` ASC) VISIBLE,
-    CONSTRAINT `fk_student_has_student_level_student1`
-    FOREIGN KEY (`student_email`)
-    REFERENCES `megapod`.`student` (`email`),
-    CONSTRAINT `fk_student_has_student_level_student_level1`
-    FOREIGN KEY (`student_level_l_id`)
-    REFERENCES `megapod`.`student_level` (`l_id`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `megapod`.`wallet`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `megapod`.`wallet` (
-                                                  `id` INT NOT NULL AUTO_INCREMENT,
-                                                  `w_email` VARCHAR(255) NOT NULL,
-    `address` VARCHAR(255) NULL DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    INDEX `wallet_email_fk` (`w_email` ASC) VISIBLE,
-    CONSTRAINT `wallet_email_fk`
-    FOREIGN KEY (`w_email`)
-    REFERENCES `megapod`.`student` (`email`))
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 4
-    DEFAULT CHARACTER SET = utf8mb3;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- The app inserts level N with student_level.l_id = N, so these rows MUST exist
+-- (the original file never created them, so completing a level failed on the foreign key).
+INSERT IGNORE INTO student_level (l_id, level) VALUES
+    (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
