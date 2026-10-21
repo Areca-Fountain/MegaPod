@@ -12,6 +12,4 @@ export const teamMembers = [
     { name: "Member Two",   role: "Role / Title", image: "/team/member2.jpg", github: "https://github.com/your-username-2" },
     { name: "Member Three", role: "Role / Title", image: "/team/member3.jpg", github: "https://github.com/your-username-3" },
     { name: "Member Four",  role: "Role / Title", image: "/team/member4.jpg", github: "https://github.com/your-username-4" },
-    { name: "Member Five",  role: "Role / Title", image: "/team/member5.jpg", github: "https://github.com/your-username-5" },
-    { name: "Member Six",   role: "Role / Title", image: "/team/member6.jpg", github: "https://github.com/your-username-6" },
 ];
