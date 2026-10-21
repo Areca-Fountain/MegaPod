@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+/* ---- Team carousel (About page) ---- */
+@keyframes team-marquee-ltr {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+.team-marquee-track {
+    animation: team-marquee-ltr 40s linear infinite;
+    will-change: transform;
+}
+
+.team-marquee:hover .team-marquee-track,
+.team-marquee:focus-within .team-marquee-track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .team-marquee-track {
+        animation: none;
+    }
+}

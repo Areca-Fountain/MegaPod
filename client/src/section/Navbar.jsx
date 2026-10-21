@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Logo from "../assets/logo.svg?react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { checkAuth } from "../utils/auth";
 import Profile from "../component/profile.jsx";
 
@@ -15,7 +15,7 @@ export default function Navbar() {
         { name: "Home", link: "/" },
         { name: "About", link: "/about" },
         { name: "Services", link: "#" },
-        { name: "Contact", link: "#" },
+        { name: "Contact", link: "/about#contact" },
     ];
 
     useEffect(() => {
@@ -74,9 +74,9 @@ text-white text-xl font-bold bg-rose-700 rounded-2xl transition duration-300 sha
                 <ul className="flex flex-col lg:flex-row lg:space-x-6 mt-4 lg:mt-0 ">
                     {MenuList.map((item, index) => (
                         <li key={index} className="mb-2 lg:mb-0 border-white">
-                            <a href={item.link} className="hover:text-yellow-400 lg:px-2 lg:py-4 lg:border-b transition font-bold hover:cursor-pointer">
+                            <Link to={item.link} onClick={() => setIsOpen(false)} className="hover:text-yellow-400 lg:px-2 lg:py-4 lg:border-b transition font-bold hover:cursor-pointer">
                                 {item.name}
-                            </a>
+                            </Link>
                         </li>
                     ))}
 
